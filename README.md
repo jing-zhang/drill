@@ -189,3 +189,7 @@ checkmarks with a book-level reset, CLI.
 
 Not yet: run history, variables/secrets, installers, CI builds for all three
 platforms, a Windows-specific engine test.
+
+## License
+
+MIT — see [LICENSE](LICENSE).

@@ -187,7 +187,7 @@ heuristic) — see `IMPLEMENTATION.md` §11.
 | M8.1 | Add `.gitignore` | Ignores `build/bin/`, `frontend/wailsjs/`, `.cache/`, `*.local.json` |
 | M8.2 | Remove `.cache/` (scratch Wails template + Go caches) | `git status` clean of caches |
 | M8.3 | Verify `gofmt -l` is empty | No output |
-| M8.4 | Decide on a licence | `LICENSE` present, referenced from the README |
+| M8.4 | Add the MIT licence | `LICENSE` present, referenced from the README |
 
 > Local builds currently use `GOPATH=$PWD/.cache/gopath` because the sandbox
 > cannot write to the default `~/go`. That is an environment workaround, not a
