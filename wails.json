@@ -1,0 +1,10 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "drill",
+  "outputfilename": "Drill",
+  "wailsjsdir": "./frontend",
+  "author": {
+    "name": "Zhang Jing",
+    "email": "kingzad.zhang@gmail.com"
+  }
+}

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drill</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="logo">&#9656;</span>
+      <div>
+        <h1>Drill</h1>
+        <p>runbooks as JSON</p>
+      </div>
+    </div>
+    <button class="btn primary block" data-act="new-book">+ New book</button>
+    <nav class="books" id="book-list"></nav>
+    <div class="problems" id="problems"></div>
+    <footer class="folder">
+      <div class="dir mono" id="dir" title="books folder"></div>
+      <div class="folder-actions">
+        <button class="btn small" data-act="choose-folder">Change folder</button>
+        <button class="btn small" data-act="refresh" title="Reload from disk">Refresh</button>
+      </div>
+    </footer>
+  </aside>
+  <main class="main" id="main"></main>
+</div>
+<div class="toast" id="toast" hidden></div>
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "id": "release-1-4-0",
+  "title": "Release 1.4.0",
+  "description": "Cut, verify and publish the **1.4.0** release.\n\nRun from the repository root; the book lives in `examples/`, so `defaults.cwd` points one level up.",
+  "tags": ["release", "example"],
+  "defaults": {
+    "shell": "sh",
+    "cwd": "..",
+    "timeoutSeconds": 300
+  },
+  "steps": [
+    {
+      "id": "check-tree",
+      "title": "Check the working tree is clean",
+      "description": "A release should start from a clean tree. If this prints changes, commit or stash them first.",
+      "command": "git status --porcelain"
+    },
+    {
+      "id": "run-tests",
+      "title": "Run the test suite",
+      "description": "Everything must be green before tagging.",
+      "command": "go test ./..."
+    },
+    {
+      "id": "build-cli",
+      "title": "Build the CLI",
+      "description": "Produces `build/drill`. Swap in your own build command.",
+      "script": "set -euo pipefail\nmkdir -p build\ngo build -trimpath -o build/drill ./cmd/drill\n./build/drill version",
+      "timeoutSeconds": 600
+    },
+    {
+      "id": "verify-books",
+      "title": "Validate every book in the repository",
+      "description": "A release should not ship runbooks that no longer parse.",
+      "command": "./build/drill validate --dir examples"
+    },
+    {
+      "id": "announce",
+      "title": "Post the release notes",
+      "description": "Copy the changelog into `#releases` and link the tag.\n\nNo command: this step is a checklist item, because a human does it."
+    }
+  ]
+}

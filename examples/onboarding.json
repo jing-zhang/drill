@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "id": "onboarding",
+  "title": "Onboarding a new engineer",
+  "description": "Day-one checklist. Most steps are description-only on purpose: an onboarding runbook is a procedure, not a script.",
+  "tags": ["people", "example"],
+  "defaults": {},
+  "steps": [
+    {
+      "id": "accounts",
+      "title": "Create the accounts",
+      "description": "- Email\n- SSO\n- Password manager\n- GitHub org invite\n\nAsk the new hire to confirm each one before moving on."
+    },
+    {
+      "id": "laptop",
+      "title": "Prepare the laptop",
+      "description": "Install the bootstrap script and run it. Then check that `drill doctor` reports every shell as available (once it exists).",
+      "command": "uname -a"
+    },
+    {
+      "id": "repo-access",
+      "title": "Grant repository access",
+      "description": "Add to the team, then have them clone the repo and run `drill list` to make sure the runbooks folder is there."
+    },
+    {
+      "id": "first-task",
+      "title": "Ship a first small change",
+      "description": "Something real but small, reviewed by a teammate. This is the step that actually tells you the setup worked."
+    },
+    {
+      "id": "buddy",
+      "title": "Assign a buddy",
+      "description": "One named person for the first two weeks. Write the name in the ticket, not in this book."
+    }
+  ]
+}
