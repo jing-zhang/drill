@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "id": "incident-503",
+  "title": "Incident: checkout returning 503",
+  "description": "Run this the moment the checkout error rate crosses **5%**.\n\n- Timebox: 15 minutes to mitigation\n- Comms: update `#incidents` every 5 minutes\n- **Do not deploy during the incident** — roll back instead",
+  "tags": ["incident", "oncall"],
+  "defaults": {
+    "shell": "sh",
+    "timeoutSeconds": 120
+  },
+  "steps": [
+    {
+      "id": "acknowledge",
+      "title": "Acknowledge the alert",
+      "description": "Claim the incident in the on-call tool, then say *\"I'm on it\"* in `#incidents` so nobody else starts debugging in parallel.",
+      "command": "echo \"acknowledged at $(date +%H:%M)\""
+    },
+    {
+      "id": "check-dashboards",
+      "title": "Check the dashboards",
+      "description": "Look at, in this order:\n\n1. Error rate by endpoint\n2. p99 latency\n3. Pod restarts\n\nIf restarts are climbing, skip straight to **Roll back the last deploy**."
+    },
+    {
+      "id": "recent-deploys",
+      "title": "List recent deploys",
+      "description": "The last hour of deploys is the first suspect. Anything shipped in the window gets rolled back before it gets debugged.",
+      "command": "git log --oneline -10"
+    },
+    {
+      "id": "rollback",
+      "title": "Roll back the last deploy",
+      "description": "Roll back rather than forward: a fix ships tomorrow, a rollback ships now.",
+      "script": "set -euo pipefail\necho 'rolling back to the previous release...'\necho 'traffic shifting 100% -> 0% -> done'",
+      "timeoutSeconds": 300
+    },
+    {
+      "id": "comms",
+      "title": "Post a status update",
+      "description": "One sentence of impact, one sentence of what you are trying. No speculation about causes."
+    },
+    {
+      "id": "postmortem",
+      "title": "Open the postmortem",
+      "description": "Blameless, within 48 hours. Link the timeline and the deploy that triggered it."
+    }
+  ]
+}

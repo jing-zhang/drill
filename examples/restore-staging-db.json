@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "id": "restore-staging-db",
+  "title": "Restore the staging database",
+  "description": "Rebuild staging from **last night's snapshot**.\n\n> Takes about 20 minutes and drops every open connection — announce it first.",
+  "tags": ["database", "recovery"],
+  "defaults": {
+    "shell": "sh",
+    "timeoutSeconds": 600
+  },
+  "steps": [
+    {
+      "id": "announce",
+      "title": "Announce the restore",
+      "description": "Write in `#staging`: *staging DB is going down for about 20 minutes*. Wait for a thumbs-up if anyone is mid-demo."
+    },
+    {
+      "id": "snapshot",
+      "title": "Find the latest snapshot",
+      "description": "Use the most recent **successful nightly**. Never a manual snapshot — they are taken for other reasons and may be partial.",
+      "command": "echo \"latest snapshot: nightly-$(date +%Y-%m-%d)\""
+    },
+    {
+      "id": "verify-checksum",
+      "title": "Verify the snapshot checksum",
+      "description": "A corrupt restore is worse than no restore: it destroys the thing you were going to fall back to.",
+      "script": "set -euo pipefail\necho 'checksum ok'"
+    },
+    {
+      "id": "restore",
+      "title": "Restore the snapshot",
+      "description": "Drop, recreate, load. **This is the destructive step.**",
+      "script": "set -euo pipefail\necho 'drop database staging'\necho 'create database staging'\necho 'load snapshot nightly'"
+    },
+    {
+      "id": "smoke",
+      "title": "Run the smoke tests",
+      "description": "If these fail, restore the previous snapshot and page the DBA. Do not start fixing data by hand.",
+      "command": "echo 'smoke tests passed'",
+      "timeoutSeconds": 300
+    },
+    {
+      "id": "notify",
+      "title": "Tell the team it is back",
+      "description": "Include the snapshot timestamp and any data-loss window, so nobody trusts data that is not there."
+    }
+  ]
+}

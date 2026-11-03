@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "id": "weekly-ops",
+  "title": "Weekly operations review",
+  "description": "Thirty minutes, every Monday morning. The goal is to leave with **one** action, not ten.\n\nBring: last week's incident list, the backup report, and the dependency scan.",
+  "tags": ["ops", "ritual"],
+  "defaults": {
+    "shell": "sh",
+    "timeoutSeconds": 60
+  },
+  "steps": [
+    {
+      "id": "errors",
+      "title": "Review last week's errors",
+      "description": "Sort by **impact, not count**. Note anything that repeated — repetition is the only signal that matters."
+    },
+    {
+      "id": "uptime",
+      "title": "Check uptime and latency",
+      "description": "Compare against last week, not against the target. Trends beat absolutes.",
+      "command": "echo 'uptime: 99.98%  p99: 412ms'"
+    },
+    {
+      "id": "backups",
+      "title": "Verify backups ran",
+      "description": "Restoring is the only proof. Check the date of the last *verified* restore, not the last backup.",
+      "command": "echo 'last verified restore: 9 days ago'"
+    },
+    {
+      "id": "deps",
+      "title": "Scan dependencies",
+      "description": "Patch the high-severity ones this week. Everything else gets a date or dies.",
+      "command": "echo '3 high, 11 medium, 2 low'"
+    },
+    {
+      "id": "action",
+      "title": "Pick one action",
+      "description": "One owner, one date. If nobody owns it, it is not an action — it is a wish."
+    },
+    {
+      "id": "notes",
+      "title": "Post the notes",
+      "description": "Five lines maximum in `#ops`. If it needs more, it is a document, not a note."
+    }
+  ]
+}
