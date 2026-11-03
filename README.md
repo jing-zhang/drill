@@ -17,6 +17,11 @@ There are two front ends over one engine:
 Steps can be ticked off as you work through a book. A book-level **Reset** clears
 them for the next run — without touching the book file itself.
 
+![The Drill desktop app: books in the left sidebar, the open runbook's steps in the main pane](docs/Screenshot.png)
+
+*Books on the left, the open runbook in the middle, each step with its own
+description, command and run button.*
+
 ## Why a file, not a service
 
 A runbook that lives in a database drifts away from the code it describes. A
